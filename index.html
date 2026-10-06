@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shubh Tiwari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;500;800&family=Cormorant+Garamond:ital,wght@0,400;1,300&family=Shrikhand&family=Cinzel:wght@500;700&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+:root{
+  --min:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --chill:"Cormorant Garamond",Georgia,serif;
+  --trip:"Shrikhand","Cooper Black",Georgia,serif;
+  --mug:"Cinzel","Trajan Pro",Georgia,serif;
+  --hi:"Tiro Devanagari Hindi","Noto Serif Devanagari",serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:light}}
+:root[data-theme="dark"]{color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:#F2F2EF;color:#141414;font-family:var(--min);-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+:focus-visible{outline:2px solid #F29E1D;outline-offset:4px}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+#spacer{position:relative;z-index:-1}
+
+.scene{position:fixed;inset:0;z-index:1;display:grid;place-items:end center;pointer-events:none;
+  padding:calc(env(safe-area-inset-top,0px) + 1rem) 1.25rem calc(env(safe-area-inset-bottom,0px) + 9vh);
+  visibility:hidden;opacity:0;isolation:isolate}
+.scene::before{content:"";position:absolute;left:0;right:0;bottom:0;height:64%;z-index:-1;pointer-events:none}
+.min::before{background:linear-gradient(to top,rgba(242,242,239,.95) 38%,rgba(242,242,239,0))}
+.chill::before{background:linear-gradient(to top,rgba(22,38,35,.9) 38%,rgba(22,38,35,0))}
+.trip::before{background:linear-gradient(to top,rgba(10,0,22,.88) 38%,rgba(10,0,22,0))}
+.mug::before{background:linear-gradient(to top,rgba(12,7,3,.92) 38%,rgba(12,7,3,0))}
+.inner{width:min(900px,100%);text-align:center;position:relative}
+.inner p{margin:0}
+.big{font-size:clamp(2.5rem,8vw,5.4rem);line-height:1}
+.mid{font-size:clamp(1.5rem,4.2vw,2.5rem);line-height:1.15}
+.small{margin-top:1rem!important;font-size:clamp(1.05rem,2.4vw,1.35rem);line-height:1.5;max-width:44ch;margin-inline:auto!important}
+.gap{margin-top:1.6rem!important}
+
+/* minimal */
+.min .inner{color:#141414}
+.min .big{font-weight:800;letter-spacing:-.035em}
+.min .mid{font-weight:300;letter-spacing:-.01em}
+.min .small{color:#3f3f3c;font-weight:300}
+.min .acc{color:#D9850B}
+
+/* chill conscious */
+.chill .inner{color:#F2ECDD;font-family:var(--chill);text-shadow:0 2px 20px rgba(20,40,36,.8)}
+.chill .big,.chill .mid{font-style:italic;font-weight:300}
+.chill .big{font-size:clamp(2.9rem,9vw,6rem)}
+.chill .small{color:rgba(242,236,221,.8);font-size:clamp(1.2rem,2.7vw,1.5rem)}
+.chill .sage{color:#C9DDB8}
+
+/* hippie trippy */
+.trip .inner{color:#FFF3C4;font-family:var(--trip)}
+.trip .big,.trip .mid{text-shadow:3px 3px 0 #FF3EA5,6px 6px 0 #3EC1FF}
+.trip .mid{font-size:clamp(1.9rem,5.5vw,3.2rem)}
+.trip .big,.trip .mid,.card{animation:hue 7s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.trip .big,.trip .mid,.card{animation:none}}
+.trip .small{font-family:var(--min);font-weight:500;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+
+/* mughal */
+.mug .inner{color:#F3E3B8;font-family:var(--mug);text-shadow:0 2px 22px rgba(10,6,2,.85)}
+.mug .big{font-weight:700;letter-spacing:.02em;font-size:clamp(2.2rem,7vw,4.8rem)}
+.mug .mid{font-weight:500;letter-spacing:.06em}
+.mug .gold{color:#E8B84A}
+.mug .small{font-family:var(--chill);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.5rem)}
+
+/* cards (trippy) */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.4rem;text-align:left}
+.card{border-radius:18px;padding:1.1rem 1.2rem;background:rgba(20,6,30,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:2px solid}
+.card:nth-child(1){border-color:#FF3EA5}.card:nth-child(2){border-color:#3EC1FF}.card:nth-child(3){border-color:#9BFF4F}
+.card .t{font-family:var(--trip);font-size:1.5rem;line-height:1.1;color:#FFF3C4}
+.card p:not(.t){font-family:var(--min);font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.85);margin-top:.4rem}
+.redact{display:inline-block;background:#FFF3C4;border-radius:3px;height:.8em;vertical-align:middle;margin-right:.3em}
+
+/* gate */
+#gate{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(242,242,239,.86);text-align:center;padding:2rem;transition:opacity 1.4s ease}
+#gate .n-en{font-family:var(--min);font-weight:800;letter-spacing:-.04em;font-size:clamp(3.4rem,14vw,9rem);line-height:.95;margin:0;opacity:0;animation:rise 1.8s ease .3s forwards}
+#gate .n-hi{font-family:var(--hi);font-size:clamp(2.2rem,8vw,5rem);color:#D9850B;margin:.5rem 0 0;opacity:0;animation:rise 1.8s ease 1.5s forwards}
+#gate .go{margin-top:3rem;opacity:0;animation:rise 1.2s ease 2.8s forwards;display:grid;gap:1rem;justify-items:center}
+#gate button{font:inherit;font-weight:500;cursor:pointer;color:#ECECE8;background:#141414;border:0;border-radius:999px;padding:.9rem 1.9rem;font-size:1.05rem}
+#gate button.quiet{background:none;color:#5a5a56;font-weight:300;font-size:.9rem;text-decoration:underline;text-underline-offset:4px;padding:.3rem}
+#gate .names{transition:transform 1.6s cubic-bezier(.6,0,.2,1),opacity 1.4s ease,filter 1.4s ease}
+#gate.leave{opacity:0;pointer-events:none}
+#gate.leave .names{transform:scale(3.2);opacity:0;filter:blur(10px)}
+@keyframes rise{from{opacity:0;transform:translateY(14px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+
+.hint{margin-top:2rem!important;font-size:.9rem;font-weight:300;color:#5a5a56}
+.hint .drip{display:block;width:1px;height:40px;margin:.7rem auto 0;background:linear-gradient(#141414,transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+@media (max-width:700px){
+  .scene{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 6vh)}
+  .cards{grid-template-columns:1fr;gap:.5rem;margin-top:1rem}
+  .card{padding:.7rem 1rem}
+  .card .t{font-size:1.25rem}
+}
+/* ===== nav ===== */
+#nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);z-index:8;display:flex;align-items:center;gap:1.4rem;
+  padding:.55rem .6rem .55rem 1.2rem;border-radius:999px;background:rgba(17,12,7,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(232,184,74,.25);color:#F3E9D6;font-family:var(--min);font-size:.92rem;width:max-content;max-width:calc(100% - 24px);transition:opacity .6s}
+#nav[hidden]{display:flex;opacity:0;pointer-events:none}
+#nav a,#nav button{color:inherit;text-decoration:none;background:none;border:0;font:inherit;cursor:pointer}
+#nav .brand{font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+#nav .links{display:flex;gap:1.1rem}
+#nav .links a{opacity:.75}#nav .links a:hover,#nav .links a.on{opacity:1;color:#E8B84A}
+#menuBtn{background:#E8B84A!important;color:#110C07!important;font-weight:500!important;padding:.45rem 1rem!important;border-radius:999px}
+#skip{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:8;font:500 .9rem var(--min);
+  color:#F3E9D6;background:rgba(17,12,7,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(232,184,74,.3);border-radius:999px;padding:.6rem 1.1rem;cursor:pointer;transition:opacity .5s}
+#skip.gone{opacity:0;pointer-events:none}
+.keys{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:8;font:300 .8rem var(--min);color:rgba(120,120,115,.9);transition:opacity .5s}
+.keys.gone{opacity:0}
+#menu{position:fixed;inset:0;z-index:20;background:rgba(14,10,6,.97);color:#F3E9D6;overflow:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 5rem) 1.5rem calc(env(safe-area-inset-bottom,0px) + 3rem);opacity:0;pointer-events:none;transition:opacity .35s}
+#menu.open{opacity:1;pointer-events:auto}
+#menu .cols{width:min(1100px,100%);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:3rem}
+#menu h3{font:italic 300 1.4rem var(--chill);color:#E8B84A;margin:0 0 1rem}
+#menu ol,#menu ul{list-style:none;margin:0;padding:0;display:grid;gap:.15rem}
+#menu ol{grid-template-columns:1fr 1fr;column-gap:2rem}
+#menu li button,#menu li a{display:flex;gap:.8rem;align-items:baseline;width:100%;text-align:left;background:none;border:0;color:#F3E9D6;font:500 1.05rem var(--min);padding:.55rem 0;border-bottom:1px solid rgba(232,184,74,.14);cursor:pointer;text-decoration:none}
+#menu li button small{font-weight:300;color:#A89C88;font-size:.8rem;min-width:1.6rem}
+#menu ul a{font:800 clamp(1.8rem,4vw,2.8rem)/1.1 var(--min);letter-spacing:-.03em;padding:.6rem 0}
+#menu li button:hover,#menu li a:hover{color:#E8B84A}
+#menuClose{position:absolute;top:calc(env(safe-area-inset-top,0px) + 18px);right:22px;background:none;border:1px solid rgba(232,184,74,.4);color:#F3E9D6;border-radius:999px;padding:.5rem 1rem;font:500 .9rem var(--min);cursor:pointer}
+
+/* ===== portfolio ===== */
+#folio{position:relative;z-index:5;background:#110C07;color:#F3E9D6;font-family:var(--min);border-top:1px solid rgba(232,184,74,.3)}
+#folio section{padding:clamp(5rem,10vw,8rem) 0;border-bottom:1px solid rgba(232,184,74,.14);scroll-margin-top:70px}
+.w{width:min(1180px,100% - 2.5rem);margin:0 auto}
+.kick{font:italic 300 clamp(1.3rem,2.4vw,1.7rem) var(--chill);color:#E8B84A;margin:0 0 .6rem}
+#folio h2{font:800 clamp(2.6rem,7vw,5.6rem)/.95 var(--min);letter-spacing:-.045em;margin:0 0 2.5rem}
+#folio p{line-height:1.65;color:#D9CDB8;max-width:62ch}
+.muted{color:#A89C88}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:4rem;align-items:end}
+.hero .name{font:800 clamp(4rem,12vw,10rem)/.85 var(--min);letter-spacing:-.06em;margin:0}
+.hero .name span{display:block;color:#E8B84A}
+.hero .lede{font-size:clamp(1.15rem,1.8vw,1.35rem);margin-top:2rem}
+.counter{margin-top:2.2rem;padding:1.2rem 1.4rem;border:1px solid rgba(232,184,74,.3);border-radius:16px;display:inline-block}
+.counter b{display:block;font:800 clamp(1.8rem,3.6vw,2.8rem) var(--min);letter-spacing:-.02em;color:#E8B84A;font-variant-numeric:tabular-nums}
+.counter small{color:#A89C88;font-size:.9rem}
+.facts{display:grid;gap:0;margin:0}
+.facts div{display:grid;grid-template-columns:8rem 1fr;gap:1rem;padding:1rem 0;border-top:1px solid rgba(232,184,74,.18)}
+.facts dt{color:#A89C88;font-size:.9rem;padding-top:.15rem}
+.facts dd{margin:0;font-weight:500;font-size:1.08rem}
+
+.timeline{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(8,1fr);gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:linear-gradient(90deg,#E8B84A,rgba(232,184,74,.15))}
+.timeline li{position:relative;padding:2.2rem 1rem 0 0}
+.timeline li::before{content:"";position:absolute;top:4px;left:0;width:16px;height:16px;border-radius:50%;background:#110C07;border:2px solid #E8B84A}
+.timeline li:last-child::before{background:#E8B84A;box-shadow:0 0 0 6px rgba(232,184,74,.2)}
+.timeline small{display:block;color:#E8B84A;font-weight:500;font-size:.85rem;margin-bottom:.3rem}
+.timeline b{display:block;font-size:1.2rem;letter-spacing:-.01em}
+.timeline span{display:block;color:#A89C88;font-size:.92rem;margin-top:.3rem;line-height:1.45}
+
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.tile{background:#1A130C;border:1px solid rgba(232,184,74,.16);border-radius:22px;padding:1.6rem;display:flex;flex-direction:column;gap:.9rem;min-height:300px;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s}
+.tile:hover{transform:translateY(-6px);border-color:rgba(232,184,74,.55)}
+.tile.wide{grid-column:span 2}
+.tile h3{font:800 1.9rem/1 var(--min);letter-spacing:-.03em;margin:0}
+.tile .sub{font:italic 300 1.25rem var(--chill);color:#E8B84A;margin:0}
+.tile p{margin:0;font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:auto}
+.tags span{font-size:.78rem;font-weight:500;padding:.3rem .7rem;border-radius:999px;background:rgba(232,184,74,.1);color:#E8B84A}
+.art{height:110px;border-radius:14px;background:#0C0905;display:grid;place-items:center;overflow:hidden;position:relative}
+.island{width:90px;height:28px;border-radius:999px;background:#000;border:1px solid #333;animation:isl 3.2s ease-in-out infinite}
+@keyframes isl{0%,30%{width:90px;height:28px}50%,80%{width:260px;height:48px}}
+.stars{font-size:1.9rem;letter-spacing:.3rem;background:linear-gradient(90deg,#FFD400 var(--f,0%),#3a3226 var(--f,0%));-webkit-background-clip:text;background-clip:text;color:transparent;animation:fill 4s steps(6) infinite}
+@property --f{syntax:'<percentage>';inherits:false;initial-value:0%}
+@keyframes fill{to{--f:100%}}
+.scan{position:absolute;left:0;right:0;height:3px;background:#47E5FF;box-shadow:0 0 14px #47E5FF;animation:scan 2.2s linear infinite}
+@keyframes scan{from{top:0}to{top:100%}}
+.street{font:800 3.2rem var(--min);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px #F3E9D6;white-space:nowrap;animation:slide 9s linear infinite}
+@keyframes slide{from{transform:translateX(30%)}to{transform:translateX(-30%)}}
+.clips{display:flex;gap:6px;width:85%;align-items:center}
+.clips i{height:34px;border-radius:6px;background:#2a2016;flex:1}
+.clips i:nth-child(2){flex:.6;background:#E8B84A}.clips i:nth-child(4){flex:.8;background:#E8B84A}.clips i:nth-child(6){flex:.4;background:#E8B84A}
+.box{width:62px;height:50px;background:#C49A6C;border-radius:4px;position:relative;animation:bob 2.4s ease-in-out infinite}
+.box::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:12px;transform:translateX(-50%);background:#A87B4F}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-4deg)}}
+.redact{display:inline-block;background:#F3E9D6;border-radius:3px;height:.8em;vertical-align:middle;margin-right:.35em}
+
+.mindgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1rem}
+.thinker{border:1px solid rgba(232,184,74,.18);border-radius:20px;padding:1.5rem;min-height:170px;display:flex;flex-direction:column;justify-content:flex-end}
+.thinker b{font:italic 400 2.1rem/1 var(--chill);color:#F3E9D6}
+.thinker span{color:#A89C88;font-size:.9rem;margin-top:.5rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.practice{background:linear-gradient(135deg,#1F2F2B,#16211E);border-radius:22px;padding:2rem}
+.practice h3{font:italic 300 2.4rem var(--chill);margin:0 0 .5rem;color:#C9DDB8}
+.practice p{color:#D5DDCF}
+
+.life{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.panel{border-radius:24px;padding:2.2rem;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.panel h3{font:800 clamp(2.2rem,4.5vw,3.4rem)/.95 var(--min);letter-spacing:-.04em;margin:0 0 .8rem}
+.panel p{color:inherit;opacity:.9}
+.panel .big{position:absolute;top:1.2rem;right:1.6rem;font-size:5rem;line-height:1}
+.road{background:linear-gradient(135deg,#FF3EA5,#7B2FF7 55%,#3EC1FF);color:#fff}
+.court{background:linear-gradient(135deg,#E8742A,#8A3410);color:#fff}
+.jungle{background:linear-gradient(135deg,#2E5E3A,#132A1A);color:#fff}
+.flute{background:linear-gradient(135deg,#1F8A70,#0B3A4A);color:#fff}
+
+.path{list-style:none;padding:0;margin:0 0 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;counter-reset:s}
+.path li{counter-increment:s;border-top:3px solid rgba(232,184,74,.35);padding-top:1.2rem}
+.path li::before{content:counter(s);font:800 2.6rem var(--min);color:rgba(232,184,74,.45);display:block;line-height:1;margin-bottom:.6rem}
+.path li:last-child{border-color:#E8B84A}.path li:last-child::before{color:#E8B84A}
+.path b{display:block;font-size:1.3rem;letter-spacing:-.01em}
+.path span{color:#A89C88;font-size:.95rem}
+.statement{font:700 clamp(2rem,5vw,3.8rem)/1.1 var(--mug);color:#E8B84A;letter-spacing:.01em;margin:0;max-width:20ch}
+
+.foot{padding:4rem 0 5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;color:#A89C88}
+.foot button{font:500 1rem var(--min);color:#110C07;background:#E8B84A;border:0;border-radius:999px;padding:.9rem 1.6rem;cursor:pointer}
+
+@media (max-width:900px){
+  #nav .links{display:none}
+  .hero,.pair,.life,#menu .cols{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr;gap:1.4rem}
+  .timeline::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto;background:linear-gradient(#E8B84A,rgba(232,184,74,.15))}
+  .timeline li{padding:0 0 0 2.4rem}.timeline li::before{top:2px}
+  .bento,.mindgrid{grid-template-columns:1fr 1fr}
+  .tile.wide{grid-column:span 2}
+  .path{grid-template-columns:1fr 1fr}
+  .keys{display:none}
+}
+@media (max-width:560px){.bento,.mindgrid,#menu ol{grid-template-columns:1fr}.tile.wide{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.island,.stars,.scan,.street,.box{animation:none}}
+.tilelink{color:#E8B84A;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(232,184,74,.4);align-self:flex-start;padding-bottom:2px}
+.tilelink:hover{border-color:#E8B84A}
+.belief{font:italic 300 clamp(2.2rem,5.5vw,4.4rem)/1.08 var(--chill);color:#F3E9D6!important;max-width:22ch!important;margin:0}
+.belief span{color:#E8B84A}
+.goals{display:grid;grid-template-columns:1.5fr 1fr;gap:1rem}
+.goal{background:#1A130C;border:1px solid rgba(232,184,74,.16);border-radius:22px;padding:2rem}
+.goal h3{font:800 1.9rem var(--min);letter-spacing:-.03em;margin:0 0 1.6rem}
+.goal .path{margin:0}
+.farmgoal{background:linear-gradient(160deg,#2B3A16,#151C0B);border-color:rgba(190,220,120,.2)}
+.launch{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 30%,#2a1d0c,#110C07 70%);text-align:center}
+.launch .w{position:relative;z-index:1}
+.launch h2{font-size:clamp(3rem,9vw,7rem)!important;color:#E8B84A}
+.launch p{margin:0 auto 2.4rem}
+#confetti{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.golink{display:inline-block;font:800 1.2rem var(--min);color:#110C07;background:#E8B84A;text-decoration:none;padding:1.1rem 2.2rem;border-radius:999px;box-shadow:0 10px 40px rgba(232,184,74,.3);transition:transform .25s}
+.golink:hover{transform:translateY(-3px) scale(1.03)}
+@media (max-width:900px){.goals{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="locked">
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<div id="gate" role="dialog" aria-label="Welcome">
+  <div>
+    <div class="names">
+      <h1 class="n-en">Shubh Tiwari</h1>
+      <p class="n-hi" lang="hi">शुभ तिवारी</p>
+    </div>
+    <div class="go">
+      <button id="begin">Begin the story</button>
+      <button class="quiet" id="mute">Begin without sound</button>
+    </div>
+  </div>
+</div>
+
+
+<nav id="nav" hidden aria-label="Site">
+  <a class="brand" href="#" data-go="0">Shubh Tiwari</a>
+  <div class="links"><a href="#about">About</a><a href="#journey">Journey</a><a href="#work">Work</a><a href="#mind">Mind</a><a href="#life">Life</a><a href="#vision">Vision</a></div>
+  <button id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+</nav>
+<button id="skip" class="gone">Skip to portfolio ↓</button>
+<p class="keys gone">← → to move through the story</p>
+<div id="menu" role="dialog" aria-label="Menu">
+  <button id="menuClose">Close</button>
+  <div class="cols">
+    <div><h3>The story</h3><ol id="chapters"></ol></div>
+    <div><h3>Portfolio</h3><ul>
+      <li><a href="#about">About</a></li><li><a href="#journey">Journey</a></li><li><a href="#work">Work</a></li>
+      <li><a href="#mind">Mind</a></li><li><a href="#life">Life</a></li><li><a href="#vision">Vision</a></li><li><a href="#launch">notchzy.com 🎉</a></li></ul></div>
+  </div>
+</div>
+<div id="spacer"></div>
+
+<main>
+<!-- MINIMAL: birth to education -->
+<section class="scene min"><div class="inner">
+  <p class="big">18 June 2007</p>
+  <p class="hint">Scroll<span class="drip"></span></p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">A hospital at dawn. One window lit.</p><p class="small">A first cry.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">Born in</p><p class="big">Rewa, Madhya Pradesh</p><p class="small">Our family's farmland is here. One day I might build something on it.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="big">My family</p><p class="small">Papa, Mummy, Bhaiya, and me.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">Home kept moving</p><p class="small">Rewa, Mumbai, Delhi, a while in Bangalore, and back to Delhi.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">School</p><p class="big">Aravali International School</p><p class="small">Sector 43, Faridabad. Subjects: PCMBA.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">All around it</p><p class="big">The Aravalli jungle</p><p class="small">After school, I explored it a lot. I have many spots of my own in there.</p>
+</div></section>
+<section class="scene min"><div class="inner">
+  <p class="mid">Now</p><p class="big">NIFT Delhi</p><p class="small">Bachelor of Fashion Technology</p>
+</div></section>
+
+<!-- CHILL CONSCIOUS: the inner world -->
+<section class="scene chill"><div class="inner">
+  <p class="big">Inside my head</p>
+  <p class="small">Osho, Krishnamurti, Krishna, Buddha. The minds I keep returning to.</p>
+</div></section>
+<section class="scene chill"><div class="inner">
+  <p class="mid sage">Vipassana</p><p class="small" style="margin-top:.3rem!important">I sat in silence and watched my own mind.</p>
+  <p class="mid sage gap">Lucid dreaming</p><p class="small" style="margin-top:.3rem!important">Waking up inside my own dreams.</p>
+</div></section>
+<section class="scene chill"><div class="inner">
+  <p class="big">The flute</p><p class="small">Krishna's instrument. I'm learning to play it now.</p>
+</div></section>
+
+<!-- HIPPIE TRIPPY: hustle and fun -->
+<section class="scene trip"><div class="inner">
+  <p class="mid">The hustle</p>
+  <div class="cards">
+    <article class="card"><p class="t"><span class="redact" style="width:3.2em"></span><span class="redact" style="width:2em"></span></p><p>Not safe for work. Some hustles stay off the record.</p></article>
+    <article class="card"><p class="t">Political clipping</p><p>Turning speeches into clips people actually watch.</p></article>
+    <article class="card"><p class="t">Dropshipping</p><p>Built and ran online stores.</p></article>
+  </div>
+</div></section>
+<section class="scene trip"><div class="inner">
+  <p class="mid">Things I build</p>
+  <div class="cards">
+    <article class="card"><p class="t">Notchzy</p><p>A Dynamic Island for Windows, built without knowing how to code.</p></article>
+    <article class="card"><p class="t">Street Lab</p><p>A 3D animated website for a streetwear store.</p></article>
+    <article class="card"><p class="t">Uxify</p><p>Upload a screenshot of your app or site, and AI rates the UI/UX and suggests improvements.</p></article>
+  </div>
+</div></section>
+<section class="scene trip"><div class="inner">
+  <p class="big">Thumb out. Road ahead.</p><p class="small">I hitchhike and travel every chance I get.</p>
+</div></section>
+<section class="scene trip"><div class="inner">
+  <p class="big">Basketball</p><p class="small">When I'm not on the road, I'm on the court.</p>
+</div></section>
+
+<!-- MUGHAL: the ambition -->
+<section class="scene mug"><div class="inner">
+  <p class="mid">Politics. Then</p><p class="big gold">Prime Minister of India</p>
+</div></section>
+<section class="scene mug"><div class="inner">
+  <p class="big">Then maybe king.<br><span class="gold">Maybe god.</span></p>
+</div></section>
+<section class="scene mug"><div class="inner">
+  <p class="small">The story is still being written.</p><p class="big gold" style="margin-top:.6rem">Shubh Tiwari</p>
+</div></section>
+</main>
+
+<div id="folio">
+<section id="about"><div class="w hero">
+  <div class="reveal">
+    <p class="kick">the portfolio</p>
+    <h2 class="name">Shubh<span>Tiwari</span></h2>
+    <p class="lede">I'm a first-year Fashion Technology student at NIFT Delhi. I edit political clips, build products with AI, sit in silence for Vipassana, explore the Aravalli jungles and hitchhike whenever I can. I see the whole universe as one country, and what I want most is to serve humanity.</p>
+    <div class="counter"><b id="alive">0</b><small>seconds alive since 18 June 2007</small></div>
+  </div>
+  <dl class="facts reveal">
+    <div><dt>Born</dt><dd>18 June 2007, Rewa, Madhya Pradesh</dd></div>
+    <div><dt>Home</dt><dd>Delhi / Faridabad</dd></div>
+    <div><dt>Studying</dt><dd>Bachelor of Fashion Technology, NIFT Delhi</dd></div>
+    <div><dt>School</dt><dd>Aravali International School, Sector 43, Faridabad (PCMBA)</dd></div>
+    <div><dt>Family</dt><dd>Papa, Mummy, Bhaiya</dd></div>
+    <div><dt>Goals</dt><dd>Hundreds. Prime Minister and agricultural industrialist are two of them.</dd></div>
+  </dl>
+</div></section>
+
+<section id="journey"><div class="w">
+  <p class="kick reveal">where I've been</p>
+  <h2 class="reveal">The journey</h2>
+  <ol class="timeline reveal">
+    <li><small>2007</small><b>Rewa</b><span>Born in Madhya Pradesh, where our family farmland is.</span></li>
+    <li><small>Then</small><b>Mumbai</b><span>The family's first move.</span></li>
+    <li><small>Then</small><b>Delhi</b><span>The city that became home.</span></li>
+    <li><small>For a while</small><b>Bangalore</b><span>A chapter in the south.</span></li>
+    <li><small>Back</small><b>Delhi NCR</b><span>Home again, for good.</span></li>
+    <li><small>School</small><b>Aravali International</b><span>Sector 43, Faridabad, with PCMBA.</span></li>
+    <li><small>After school</small><b>Aravalli jungles</b><span>Explored them a lot. Many spots of my own.</span></li>
+    <li><small>Now</small><b>NIFT Delhi</b><span>Bachelor of Fashion Technology.</span></li>
+  </ol>
+</div></section>
+
+<section id="work"><div class="w">
+  <p class="kick reveal">what I've built and done</p>
+  <h2 class="reveal">The work</h2>
+  <div class="bento">
+    <article class="tile wide reveal"><div class="art"><div class="island"></div></div>
+      <h3>Notchzy</h3><p class="sub">A Dynamic Island for Windows</p>
+      <p>A live overlay that brings the Dynamic Island idea to Windows desktops. I started with zero coding knowledge and built it with AI. It's now live on its own domain, and I market it every day on X.</p>
+      <a class="tilelink" href="https://notchzy.com" target="_blank" rel="noopener">Visit notchzy.com ↗</a>
+      <div class="tags"><span>Founder</span><span>Windows app</span><span>Built with AI</span></div></article>
+    <article class="tile reveal"><div class="art"><div class="stars">★★★★★</div><i class="scan"></i></div>
+      <h3>Uxify</h3><p class="sub">An AI design critic</p>
+      <p>Upload a screenshot of any app or website. Uxify rates the UI/UX and tells you what to improve.</p>
+      <div class="tags"><span>Web app</span><span>AI</span><span>UX</span></div></article>
+    <article class="tile reveal"><div class="art"><div class="street">STREET LAB · STREET LAB</div></div>
+      <h3>Street Lab</h3><p class="sub">3D site for a streetwear brand</p>
+      <p>An interactive, phone-first, 3D animated website for a streetwear store.</p>
+      <div class="tags"><span>Client</span><span>3D web</span></div></article>
+    <article class="tile wide reveal"><div class="art"><div class="clips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <h3>Political clipping</h3><p class="sub">Paid video work</p>
+      <p>I turn long political speeches into short clips people actually watch: editing, captions, uploading and scheduling. It's taught me how messages travel and what makes people stop scrolling.</p>
+      <div class="tags"><span>Video editing</span><span>Politics</span><span>Social media</span></div></article>
+    <article class="tile reveal"><div class="art"><div class="box"></div></div>
+      <h3>Dropshipping</h3><p class="sub">E-commerce</p>
+      <p>Built and ran online stores.</p>
+      <div class="tags"><span>E-commerce</span></div></article>
+    <article class="tile wide reveal"><div class="art"><div style="width:70%"><span class="redact" style="width:40%"></span><span class="redact" style="width:25%"></span><span class="redact" style="width:20%"></span></div></div>
+      <h3><span class="redact" style="width:4.5em"></span></h3><p class="sub">Not safe for work</p>
+      <p>Some hustles stay off the record.</p>
+      <div class="tags"><span>Classified</span></div></article>
+  </div>
+</div></section>
+
+<section id="mind"><div class="w">
+  <p class="kick reveal">what shapes how I think</p>
+  <h2 class="reveal">The mind</h2>
+  <div class="mindgrid">
+    <div class="thinker reveal"><b>Osho</b><span>Thinker</span></div>
+    <div class="thinker reveal"><b>J. Krishnamurti</b><span>Thinker</span></div>
+    <div class="thinker reveal"><b>Krishna</b><span>The Gita</span></div>
+    <div class="thinker reveal"><b>Buddha</b><span>The path of awakening</span></div>
+  </div>
+  <div class="pair">
+    <div class="practice reveal"><h3>Vipassana</h3><p>I've sat a Vipassana course: days of silence, watching my own mind.</p></div>
+    <div class="practice reveal"><h3>Lucid dreaming</h3><p>I practise becoming aware inside my own dreams.</p></div>
+  </div>
+</div></section>
+
+<section id="life"><div class="w">
+  <p class="kick reveal">off the clock</p>
+  <h2 class="reveal">The life</h2>
+  <div class="life">
+    <div class="panel road reveal"><span class="big" aria-hidden="true">👍</span><h3>Hitchhiking &amp; travel</h3><p>Thumb out, road ahead. I travel every chance I get.</p></div>
+    <div class="panel court reveal"><span class="big" aria-hidden="true">🏀</span><h3>Basketball</h3><p>When I'm not on the road, I'm on the court.</p></div>
+    <div class="panel jungle reveal"><span class="big" aria-hidden="true">🌳</span><h3>The Aravalli jungle</h3><p>The jungles around my school, explored again and again after classes. I have many spots of my own in there.</p></div>
+    <div class="panel flute reveal"><span class="big" aria-hidden="true">🪈</span><h3>The flute</h3><p>Krishna's instrument. I'm learning to play it now.</p></div>
+  </div>
+</div></section>
+
+<section id="vision"><div class="w">
+  <p class="kick reveal">where I'm going</p>
+  <h2 class="reveal">The vision</h2>
+  <p class="belief reveal">I see the universe as one country.<br><span>What I want is to serve humanity.</span></p>
+  <p class="muted reveal" style="margin:3rem 0 1.4rem">I have hundreds of goals. Two of them:</p>
+  <div class="goals">
+    <div class="goal reveal"><h3>Politics</h3><ol class="path">
+      <li><b>Student voice</b><span>Speak up for people around me.</span></li>
+      <li><b>MLA</b><span>Delhi or Faridabad.</span></li>
+      <li><b>Parliament</b><span>Take the work further.</span></li>
+      <li><b>Prime Minister</b><span>The biggest stage to serve.</span></li></ol></div>
+    <div class="goal farmgoal reveal"><h3>Agricultural industrialist</h3><p>Our family has farmland in Rewa. One day I might build an agricultural business there.</p></div>
+  </div>
+  <p class="statement reveal" style="margin-top:4rem">The story is still being written.</p>
+</div></section>
+
+<section id="launch" class="launch"><canvas id="confetti" aria-hidden="true"></canvas><div class="w">
+  <p class="kick">just launched 🎉</p>
+  <h2>notchzy.com is live</h2>
+  <p>Today we got the domain and put Notchzy on it. From an idea I couldn't even code at the start, to a real product on its own .com.</p>
+  <a class="golink" href="https://notchzy.com" target="_blank" rel="noopener">Go to notchzy.com ↗</a>
+</div></section>
+
+<div class="w foot"><span>Shubh Tiwari · 2026</span><button id="replay">Replay the story ↑</button></div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const overlays=[...document.querySelectorAll('.scene')];
+const N=overlays.length, GAP=70;
+const TH=['min','min','min','min','min','min','min','min','chill','chill','chill','trip','trip','trip','trip','mug','mug','mug'];
+const BG={0:'#F2F2EF',8:'#2C4743',9:'#3B5A52',10:'#2F4A44',15:'#0F2B23',16:'#3A0E1A',17:'#140D07'};
+const BLOOM={min:0,chill:.2,trip:.45,mug:.28}, AMB={min:1.15,chill:.55,trip:.5,mug:.45};
+const spacer=document.getElementById('spacer');
+let beganAt=0,seg=1,tTarget=0,t=0,started=false,soundOn=true,actx=null,cried=false;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const ease=k=>k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+
+function sizeScroll(){seg=innerHeight*1.2;spacer.style.height=((N-1)*seg+innerHeight)+'px';}
+sizeScroll();
+addEventListener('scroll',()=>{tTarget=Math.min(scrollY/seg,N-1);},{passive:true});
+
+function updateOverlays(){
+  overlays.forEach((s,i)=>{
+    const d=t-i;let op=1,y=0;
+    if(i===0&&d<0){}
+    else if(d<-.55){op=0;y=40}
+    else if(d<-.2){const k=ease((d+.55)/.35);op=k;y=40*(1-k)}
+    else if(d<=.2||i===N-1){}
+    else if(d<.5){const k=ease((d-.2)/.3);op=1-k;y=-40*k}
+    else{op=0;y=-40}
+    s.style.opacity=op.toFixed(3);s.style.visibility=op<.01?'hidden':'visible';
+    s.querySelector('.inner').style.transform='translateY('+y.toFixed(1)+'px)';
+  });
+}
+
+/* sound */
+function cry(){
+  if(!actx)return;
+  const now=actx.currentTime+.05;
+  const master=actx.createGain();master.gain.value=.13;
+  const lp=actx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3800;lp.Q.value=.5;
+  const delay=actx.createDelay();delay.delayTime.value=.09;const fb=actx.createGain();fb.gain.value=.22;const wet=actx.createGain();wet.gain.value=.18;
+  lp.connect(master);lp.connect(delay);delay.connect(fb);fb.connect(delay);delay.connect(wet);wet.connect(master);master.connect(actx.destination);
+  // glottal-like source: harmonics falling off smoothly
+  const H=32,re=new Float32Array(H),im=new Float32Array(H);for(let n=1;n<H;n++)im[n]=1/Math.pow(n,1.35);
+  const wave=actx.createPeriodicWave(re,im);
+  // breath noise
+  const nb=actx.createBuffer(1,actx.sampleRate*4,actx.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  const formants=[[1100,6,1],[2600,8,.55],[4200,10,.2]];
+  [[0,.75],[1.15,.95],[2.55,1.35]].forEach(([off,dur])=>{
+    const st=now+off,en=st+dur;
+    const o=actx.createOscillator();o.setPeriodicWave(wave);
+    const f0=430+Math.random()*30;
+    o.frequency.setValueAtTime(f0*.82,st);
+    o.frequency.linearRampToValueAtTime(f0*1.12,st+.18);
+    o.frequency.setTargetAtTime(f0,st+.2,.15);
+    o.frequency.linearRampToValueAtTime(f0*.78,en);
+    const vib=actx.createOscillator(),vg=actx.createGain();vib.frequency.value=5.5;vg.gain.value=6;vib.connect(vg);vg.connect(o.frequency);
+    const env=actx.createGain();env.gain.setValueAtTime(0,st);env.gain.linearRampToValueAtTime(1,st+.12);env.gain.setTargetAtTime(.75,st+.15,.25);env.gain.setTargetAtTime(0,en-.18,.07);
+    o.connect(env);
+    formants.forEach(([fr,q,gn])=>{const bp=actx.createBiquadFilter();bp.type='bandpass';bp.frequency.value=fr;bp.Q.value=q;const g=actx.createGain();g.gain.value=gn*1.6;env.connect(bp);bp.connect(g);g.connect(lp);});
+    const ns=actx.createBufferSource();ns.buffer=nb;const nf=actx.createBiquadFilter();nf.type='bandpass';nf.frequency.value=2800;nf.Q.value=1.2;
+    const ne=actx.createGain();ne.gain.setValueAtTime(0,st);ne.gain.linearRampToValueAtTime(.06,st+.1);ne.gain.setTargetAtTime(0,en-.15,.06);
+    ns.connect(nf);nf.connect(ne);ne.connect(lp);
+    o.start(st);vib.start(st);ns.start(st);o.stop(en+.3);vib.stop(en+.3);ns.stop(en+.3);
+  });
+}
+function begin(withSound){
+  soundOn=withSound;
+  if(withSound){try{actx=new (window.AudioContext||window.webkitAudioContext)();actx.resume();}catch(e){soundOn=false;}}
+  const gate=document.getElementById('gate');gate.classList.add('leave');setTimeout(()=>{gate.style.display='none';},1600);
+  document.body.classList.remove('locked');started=true;beganAt=performance.now();document.getElementById('nav').hidden=false;uiTick();scrollTo(0,0);
+}
+document.getElementById('begin').addEventListener('click',()=>begin(true));
+document.getElementById('mute').addEventListener('click',()=>begin(false));
+
+/* 3D */
+let tripSky,renderer,scene,camera,composer,bloom,amb,pieces=[],extras=[],stars,ptr={x:0,y:0};
+const canvas=document.getElementById('gl');
+const hasGL=!!window.THREE&&(()=>{try{return !!(canvas.getContext('webgl2')||canvas.getContext('webgl'))}catch(e){return false}})();
+const INK=0x161616,ACC=0xF29E1D,GOLD=0xE8B84A,SAGE=0xA8C3A0,SAND=0xE8D9B5,BLUSH=0xF4C7C3;
+const std=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6},o));
+const glow=(c,i=1)=>std(c,{emissive:c,emissiveIntensity:i*.45,roughness:.45});
+const flat=c=>new THREE.MeshBasicMaterial({color:c});
+const edges=(geo,c,o=.85)=>new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:c,transparent:true,opacity:o}));
+const hue=(m,h,l=.6)=>{m.color.setHSL(h%1,.95,l);if(m.emissive)m.emissive.setHSL(h%1,.95,l*.75);};
+const FONTS={min:'500 120px Archivo, Arial, sans-serif',chill:'italic 300 135px "Cormorant Garamond", Georgia, serif',trip:'125px Shrikhand, Georgia, serif',mug:'700 110px Cinzel, Georgia, serif'};
+function label(text,theme,color,w=5){
+  const c=document.createElement('canvas');c.width=1024;c.height=256;const x=c.getContext('2d');
+  x.textAlign='center';x.textBaseline='middle';x.font=FONTS[theme];const mw=x.measureText(text).width;if(mw>980){const px=parseInt(FONTS[theme].match(/(\d+)px/)[1]);x.font=FONTS[theme].replace(/\d+px/,Math.floor(px*980/mw)+'px');}
+  if(theme!=='min'){x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=18;}
+  x.fillStyle=color;x.fillText(text,512,135);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));
+  s.scale.set(w,w/4,1);return s;
+}
+function tex(w,h,draw){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);t.anisotropy=4;return t;}
+function emoji(ch,w=5){
+  const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d');
+  x.textAlign='center';x.textBaseline='middle';x.font='200px serif';x.fillText(ch,128,140);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));s.scale.set(w,w,1);return s;
+}
+function add(i,build){const g=new THREE.Group();g.position.z=-i*GAP;const tick=build(g)||(()=>{});scene.add(g);pieces.push({g,tick,i});}
+
+function buildWorld(){
+  /* ===== MINIMAL: flat white shapes, black lines, one amber accent ===== */
+  // 18 June 2007: a tear-off calendar; the 17th flips away to reveal the 18th
+  add(0,g=>{
+    const W=5,H=6,blk=new THREE.BoxGeometry(W,H,1.2);
+    g.add(new THREE.Mesh(blk,flat(0xffffff)));g.add(edges(blk,INK,1));
+    const page=day=>tex(500,600,(x,w,h)=>{x.fillStyle='#fff';x.fillRect(0,0,w,h);x.fillStyle='#F29E1D';x.fillRect(0,0,w,120);
+      x.textAlign='center';x.fillStyle='#fff';x.font='800 64px Archivo, Arial';x.fillText('JUNE',w/2,84);
+      x.fillStyle='#161616';x.font='800 290px Archivo, Arial';x.fillText(day,w/2,420);x.font='300 60px Archivo, Arial';x.fillText('2007',w/2,545);
+      x.strokeStyle='#161616';x.lineWidth=4;x.strokeRect(2,2,w-4,h-4);});
+    const front=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshBasicMaterial({map:page('18')}));front.position.z=.61;g.add(front);
+    const hinge=new THREE.Group();hinge.position.set(0,H/2,.64);g.add(hinge);
+    const old=new THREE.Mesh(new THREE.PlaneGeometry(W,H),new THREE.MeshBasicMaterial({map:page('17'),side:THREE.DoubleSide}));old.position.y=-H/2;hinge.add(old);
+    [-1.4,1.4].forEach(x=>{const r=new THREE.Mesh(new THREE.TorusGeometry(.35,.07,8,32),flat(INK));r.position.set(x,H/2,.3);g.add(r);});
+    g.position.y=1.5;
+    return tm=>{const since=beganAt?(performance.now()-beganAt)/1000-1.4:-1;const k=clamp(since/1.1,0,1);
+      hinge.rotation.x=-ease(k)*Math.PI*.97;old.visible=k<1;g.rotation.y=Math.sin(tm*.5)*.25;};
+  });
+  add(1,g=>{
+    const body=new THREE.BoxGeometry(18,13,6);
+    const b=new THREE.Mesh(body,flat(0xffffff));b.position.set(0,1.5,-3);g.add(b);
+    const e=edges(body,INK,1);e.position.copy(b.position);g.add(e);
+    const win=new THREE.PlaneGeometry(1.8,1.8);
+    [-6,-3,0,3,6].forEach(x=>[-2.5,.5,3.5].forEach(y=>{
+      if(x===0&&y===-2.5)return;const lit=x===0&&y===.5;
+      const m=new THREE.Mesh(win,flat(lit?ACC:0xE4E4E0));m.position.set(x,y,.03);g.add(m);
+      const f=edges(win,INK,1);f.position.set(x,y,.05);g.add(f);
+      const bar=new THREE.Mesh(new THREE.PlaneGeometry(.06,1.8),flat(INK));bar.position.set(x,y,.06);g.add(bar);
+    }));
+    const door=new THREE.Mesh(new THREE.PlaneGeometry(2.6,3.4),flat(INK));door.position.set(0,-3.3,.03);g.add(door);
+    const c1=new THREE.Mesh(new THREE.BoxGeometry(.6,2.4,.4),flat(INK)),c2=new THREE.Mesh(new THREE.BoxGeometry(2.4,.6,.4),flat(INK));
+    c1.position.set(0,9.6,-3);c2.position.copy(c1.position);g.add(c1,c2);
+  });
+  add(2,g=>{
+    const pin=new THREE.Group();
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(1.5,4.2,32),flat(INK));cone.rotation.x=Math.PI;cone.position.y=2.1;
+    const head=new THREE.Mesh(new THREE.SphereGeometry(1.75,32,32),flat(INK));head.position.y=4.6;
+    const dot=new THREE.Mesh(new THREE.CircleGeometry(.6,32),flat(ACC));dot.position.set(0,4.6,1.8);
+    pin.add(cone,head,dot);pin.position.y=-1;g.add(pin);
+    // family farmland: plots of crop rows, and an amber dashed outline of something I might build there
+    const farm=new THREE.Group();farm.position.y=-6;g.add(farm);
+    const rows=[];const P=7;
+    for(let gx=-4;gx<4;gx++)for(let gz=-5;gz<3;gz++){
+      const x0=gx*P+.4,z0=gz*P+.4,w=P-.8;
+      const plot=new THREE.Mesh(new THREE.PlaneGeometry(w,w),flat((gx+gz)%2?0xEAEAE5:0xF7F7F3));plot.rotation.x=-Math.PI/2;plot.position.set(x0+w/2,0,z0+w/2);farm.add(plot);
+      const horiz=(gx+gz)%2===0;for(let r=.6;r<w;r+=.9){if(horiz)rows.push(x0,0.02,z0+r,x0+w,0.02,z0+r);else rows.push(x0+r,0.02,z0,x0+r,0.02,z0+w);}}
+    const rg=new THREE.BufferGeometry();rg.setAttribute('position',new THREE.Float32BufferAttribute(rows,3));
+    farm.add(new THREE.LineSegments(rg,new THREE.LineBasicMaterial({color:INK,transparent:true,opacity:.35})));
+    const future=new THREE.BoxGeometry(9,4,6);const fl=new THREE.LineSegments(new THREE.EdgesGeometry(future),new THREE.LineDashedMaterial({color:ACC,dashSize:.5,gapSize:.35}));
+    fl.computeLineDistances();fl.position.set(14,2,-16);farm.add(fl);
+    const fut=label('someday','min','#D9850B',3);fut.position.set(14,5.2,-16);farm.add(fut);
+    const ring=new THREE.Mesh(new THREE.RingGeometry(.97,1,96),new THREE.MeshBasicMaterial({color:INK,transparent:true,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-1;g.add(ring);
+    return tm=>{pin.position.y=-1+Math.sin(tm*1.5)*.35;const f=(tm*.4)%1;ring.scale.setScalar(1+f*7);ring.material.opacity=1-f;};
+  });
+  // Family: four figures standing together, tallest to smallest; you in amber
+  add(3,g=>{
+    const row=new THREE.Group();g.add(row);
+    [['Papa',4.4,INK],['Mummy',4,INK],['Bhaiya',3.8,INK],['Me',3.4,ACC]].forEach(([n,h,c],k)=>{
+      const p=new THREE.Group();p.position.x=(k-1.5)*3.2;
+      const body=new THREE.Mesh(new THREE.CylinderGeometry(.55,.95,h,32),flat(c));body.position.y=h/2-3;p.add(body);
+      const head=new THREE.Mesh(new THREE.SphereGeometry(.62,32,32),flat(c));head.position.y=h-3+.85;p.add(head);
+      const l=label(n,'min','#161616',3.6);l.position.y=-3.9;p.add(l);row.add(p);});
+    g.position.y=1.5;
+    return tm=>{row.rotation.y=Math.sin(tm*.4)*.35;};
+  });
+  add(4,g=>{
+    const R=new THREE.Vector3(3,0,0),M=new THREE.Vector3(-5.5,-2,0),D=new THREE.Vector3(0,6.5,0),B=new THREE.Vector3(-1,-8,0);
+    const curve=new THREE.CatmullRomCurve3([R,new THREE.Vector3(-1.5,-1.6,1),M,new THREE.Vector3(-4.5,3.5,1),D,new THREE.Vector3(2.5,-1,2),B,new THREE.Vector3(5,-3,5),D]);
+    const tube=new THREE.TubeGeometry(curve,500,.06,6,false);const total=tube.index.count;
+    const map=new THREE.Group();map.add(new THREE.Mesh(tube,flat(INK)));
+    [[R,'Rewa'],[M,'Mumbai'],[D,'Delhi'],[B,'Bangalore']].forEach(([v,n])=>{
+      const c=new THREE.Mesh(new THREE.SphereGeometry(.4,24,24),flat(INK));c.position.copy(v);map.add(c);
+      const l=label(n,'min','#161616',4.4);l.position.set(v.x+(v.x<0?-2.8:2.8),v.y+.3,v.z);map.add(l);});
+    const trav=new THREE.Mesh(new THREE.SphereGeometry(.42,24,24),flat(ACC));map.add(trav);
+    map.position.y=2;map.rotation.x=-.25;g.add(map);
+    return (tm,d)=>{const k=clamp((d+.6)/.75,0,1);tube.setDrawRange(0,Math.floor(total*k/3)*3);trav.position.copy(curve.getPointAt(Math.max(k,.001)));map.rotation.y=Math.sin(tm*.3)*.2;};
+  });
+  // School: Aravali International School, drawn as a line building; the camera flies over its roof into the jungle
+  add(5,g=>{
+    const sch=new THREE.Group();
+    const body=new THREE.BoxGeometry(22,7,5);const b=new THREE.Mesh(body,flat(0xffffff));sch.add(b);sch.add(edges(body,INK,1));
+    const win=new THREE.PlaneGeometry(1.5,1.3);
+    for(let r=0;r<2;r++)for(let c=0;c<10;c++){const x=-9.5+c*2.1;if(Math.abs(x)<1.6&&r===0)continue;
+      const m=new THREE.Mesh(win,flat(0xE4E4E0));m.position.set(x,-1.4+r*3,2.53);sch.add(m);const f=edges(win,INK,1);f.position.set(x,-1.4+r*3,2.55);sch.add(f);}
+    const porch=new THREE.BoxGeometry(4,4.4,1.6);const pm=new THREE.Mesh(porch,flat(0xffffff));pm.position.set(0,-1.3,3.3);sch.add(pm);const pe=edges(porch,INK,1);pe.position.copy(pm.position);sch.add(pe);
+    const door=new THREE.Mesh(new THREE.PlaneGeometry(2,3),flat(INK));door.position.set(0,-2,4.12);sch.add(door);
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,6,8),flat(INK));pole.position.set(9,6.5,1);sch.add(pole);
+    const flag=new THREE.Mesh(new THREE.PlaneGeometry(2,1.2,8,1),new THREE.MeshBasicMaterial({color:ACC,side:THREE.DoubleSide}));flag.position.set(10,8.8,1);sch.add(flag);
+    const sign=label('ARAVALI INTERNATIONAL SCHOOL','min','#161616',9);sign.position.set(0,4.6,2.6);sch.add(sign);
+    sch.position.y=-8.5;g.add(sch);
+    // the Aravalli ridge behind
+    const ridge=[];for(let i=0;i<=40;i++){const x=-60+i*3;ridge.push(new THREE.Vector3(x,-5+Math.abs(Math.sin(i*.55))*4+Math.sin(i*1.7)*1.4,0));}
+    const rl=new THREE.Line(new THREE.BufferGeometry().setFromPoints(ridge),new THREE.LineBasicMaterial({color:INK}));rl.position.z=-40;g.add(rl);
+    const fp=flag.geometry.attributes.position,base=fp.array.slice();
+    return tm=>{for(let i=0;i<fp.count;i++){const x=base[i*3];fp.array[i*3+2]=Math.sin(x*2.5+tm*4)*.15*(x+1);}fp.needsUpdate=true;};
+  });
+  // The Aravalli jungle: line-drawn trees around a trail, with my spots marked in amber
+  add(6,g=>{
+    const trunkG=new THREE.CylinderGeometry(.12,.18,3,6),crownG=new THREE.IcosahedronGeometry(1.8,0),coneG=new THREE.ConeGeometry(1.6,3.6,7);
+    const wm=flat(0xffffff),tk=flat(INK);
+    for(let k=0;k<130;k++){
+      const side=Math.random()<.5?-1:1,x=side*(3.2+Math.pow(Math.random(),1.4)*30),z=60-Math.random()*105,sc=.7+Math.random()*.9;
+      const t=new THREE.Group();const tr=new THREE.Mesh(trunkG,tk);tr.position.y=1.5;t.add(tr);
+      const cg=Math.random()<.6?crownG:coneG;const cr=new THREE.Mesh(cg,wm);cr.position.y=3.8;t.add(cr);const ce=edges(cg,INK,.9);ce.position.y=3.8;t.add(ce);
+      t.position.set(x,-6,z);t.scale.setScalar(sc);t.rotation.y=Math.random()*6;g.add(t);}
+    const trail=[];for(let i=0;i<60;i++){const z=60-i*1.8;trail.push(new THREE.Vector3(Math.sin(i*.18)*1.6,-5.95,z));}
+    const tl=new THREE.Line(new THREE.BufferGeometry().setFromPoints(trail),new THREE.LineDashedMaterial({color:INK,dashSize:.6,gapSize:.5}));tl.computeLineDistances();g.add(tl);
+    const spots=[[-6,-2],[7,-6],[-10,-14],[4,-20],[12,-12],[-4,8],[9,6]].map(([x,z])=>{
+      const sp=new THREE.Group();const stick=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,3,6),flat(INK));stick.position.y=1.5;sp.add(stick);
+      const dot=new THREE.Mesh(new THREE.SphereGeometry(.45,20,20),flat(ACC));dot.position.y=3.2;sp.add(dot);
+      const ring=new THREE.Mesh(new THREE.RingGeometry(.9,1,48),new THREE.MeshBasicMaterial({color:ACC,transparent:true,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=.02;sp.add(ring);
+      sp.position.set(x,-6,z);g.add(sp);return {dot,ring};});
+    return tm=>{spots.forEach((s,k)=>{s.dot.position.y=3.2+Math.sin(tm*2+k)*.25;const f=(tm*.5+k/7)%1;s.ring.scale.setScalar(1+f*2.5);s.ring.material.opacity=1-f;});};
+  });
+  // NIFT: a tailor's dress form with a measuring tape, the symbol of fashion
+  add(7,g=>{
+    const prof=[[0,5.6],[.38,5.5],[.42,4.9],[1.6,4.4],[1.85,3.8],[1.7,2.7],[1.25,1.6],[1.12,1.2],[1.45,.3],[1.62,-.4],[1.45,-1],[0,-1.1]].map(([r,y])=>new THREE.Vector2(r,y));
+    const geo=new THREE.LatheGeometry(prof,28);const form=new THREE.Group();
+    form.add(new THREE.Mesh(geo,flat(0xffffff)));
+    form.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo,10),new THREE.LineBasicMaterial({color:INK,transparent:true,opacity:.55})));
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,4.5,12),flat(INK));pole.position.y=-3.3;form.add(pole);
+    const base=new THREE.Mesh(new THREE.CylinderGeometry(1.6,1.6,.12,48),flat(INK));base.position.y=-5.6;form.add(base);
+    const tape=new THREE.Mesh(new THREE.TorusGeometry(1.17,.06,8,64),flat(ACC));tape.rotation.x=Math.PI/2;tape.position.y=1.2;form.add(tape);
+    const hang=new THREE.Mesh(new THREE.BoxGeometry(.28,2.4,.03),flat(ACC));hang.position.set(.9,0,.85);hang.rotation.z=.1;form.add(hang);
+    form.position.y=1.8;g.add(form);
+    return tm=>{form.rotation.y=tm*.4;};
+  });
+
+  /* ===== CHILL CONSCIOUS ===== */
+  // Inside my head: a glass head in profile; the camera flies into it, thoughts orbit inside
+  add(8,g=>{
+    const P=[[-2.5,-7],[-3.2,-4],[-4.6,-1],[-5,2],[-4.4,5],[-2.6,7],[0,7.8],[2.6,7.2],[4.3,5.3],[5,3],[5.1,1.5],[5.9,.2],[6.6,-1.2],[5.6,-1.8],[5.8,-2.6],[5.4,-3.1],[5.7,-3.7],[5.1,-4.4],[5.3,-5.2],[4.2,-6],[2.4,-6.2],[1.6,-7]].map(([x,y])=>new THREE.Vector2(x-.6,y));
+    const shape=new THREE.Shape();shape.moveTo(P[0].x,P[0].y);shape.splineThru(P.slice(1));shape.lineTo(P[0].x,P[0].y);
+    const geo=new THREE.ExtrudeGeometry(shape,{depth:2,bevelEnabled:true,bevelThickness:.5,bevelSize:.4,bevelSegments:3,curveSegments:48});geo.translate(0,0,-1);
+    const head=new THREE.Group();
+    head.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:SAGE,transparent:true,opacity:.2,depthWrite:false,roughness:.4,side:THREE.DoubleSide})));
+    const line=new THREE.CatmullRomCurve3(shape.getSpacedPoints(240).map(v=>new THREE.Vector3(v.x,v.y,1.5)),true);
+    head.add(new THREE.Mesh(new THREE.TubeGeometry(line,400,.06,6,true),glow(SAND,.9)));
+    head.scale.setScalar(1.15);head.position.y=-3;g.add(head);
+    const mind=new THREE.Group();mind.position.y=-3+3.6*1.15;g.add(mind);
+    ['Osho','J. Krishnamurti','Krishna','Buddha'].forEach((n,k)=>{const l=label(n,'chill','#F2ECDD',k===1?5.6:4);const a=k/4*Math.PI*2;l.position.set(Math.cos(a)*2.6,(k%2?.7:-.7),Math.sin(a)*1.6);mind.add(l);});
+    const n=350,pp=new Float32Array(n*3);for(let k=0;k<n;k++){const u=Math.random()*Math.PI*2,v=Math.acos(2*Math.random()-1),r=Math.cbrt(Math.random());pp[k*3]=Math.sin(v)*Math.cos(u)*3.6*r;pp[k*3+1]=Math.cos(v)*2.6*r;pp[k*3+2]=Math.sin(v)*Math.sin(u)*1.4*r;}
+    const spark=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(pp,3)),new THREE.PointsMaterial({color:SAND,size:.09,transparent:true,opacity:.8}));mind.add(spark);
+    return tm=>{head.rotation.y=Math.sin(tm*.3)*.3;mind.rotation.y=tm*.35;spark.rotation.y=-tm*.2;};
+  });
+  add(9,g=>{
+    const lotus=new THREE.Group();g.add(lotus);const petal=new THREE.SphereGeometry(1,24,16);
+    [[8,2.4,-.5,BLUSH],[8,1.5,-1,0xFBE7DA]].forEach(([n,r,tilt,c],layer)=>{for(let k=0;k<n;k++){
+      const h=new THREE.Group();h.rotation.y=k/n*Math.PI*2+layer*.4;const p=new THREE.Mesh(petal,glow(c,.45));p.scale.set(.9,.22,2.4);p.position.z=r;p.rotation.x=tilt;h.add(p);lotus.add(h);}});
+    const c=new THREE.Mesh(new THREE.SphereGeometry(.9,24,24),glow(SAND,1.4));c.position.y=.4;lotus.add(c);lotus.rotation.x=.55;
+    const n=900,p=new Float32Array(n*3);for(let k=0;k<n;k++){p[k*3]=(Math.random()-.5)*26;p[k*3+1]=(Math.random()-.5)*16;p[k*3+2]=(Math.random()-.5)*20;}
+    const cloud=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(p,3)),new THREE.PointsMaterial({color:0xDCEBD2,size:.13,transparent:true,opacity:.7}));g.add(cloud);
+    return tm=>{lotus.rotation.y=tm*.2;lotus.position.y=Math.sin(tm*.7)*.5;cloud.rotation.y=tm*.04;};
+  });
+
+  // The flute: a bansuri with Krishna's peacock feather; notes float up as it plays
+  add(10,g=>{
+    const fl=new THREE.Group();
+    const bam=std(0xD9B97A,{roughness:.55});const tube=new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,13,24),bam);tube.rotation.z=Math.PI/2;fl.add(tube);
+    [-6.2,-4.8,3.4,6.2].forEach(x=>{const r=new THREE.Mesh(new THREE.TorusGeometry(.26,.06,8,24),std(0x6b3a1f));r.rotation.y=Math.PI/2;r.position.x=x;fl.add(r);});
+    for(let k=0;k<6;k++){const h=new THREE.Mesh(new THREE.CircleGeometry(.1,16),flat(0x2a1a0c));h.position.set(-2+k*.85,.245,0);h.rotation.x=-Math.PI/2;fl.add(h);}
+    const em=new THREE.Mesh(new THREE.CircleGeometry(.12,16),flat(0x2a1a0c));em.position.set(5.2,.245,0);em.rotation.x=-Math.PI/2;fl.add(em);
+    const fe=new THREE.Group();
+    const vane=new THREE.Mesh(new THREE.SphereGeometry(1,32,16),std(0x1F8A70,{roughness:.6,emissive:0x0d4a3c,emissiveIntensity:.3}));vane.scale.set(1.1,2.8,.05);vane.position.y=2.6;fe.add(vane);
+    [[.75,0xC9A23A],[.5,0x1E5FAF],[.25,0x0B1F3A]].forEach(([r,c],k)=>{const d=new THREE.Mesh(new THREE.CircleGeometry(r,32),flat(c));d.position.set(0,3.6,.07+k*.01);fe.add(d);});
+    const quill=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,5.4,8),flat(0xEDE3CC));quill.position.y=2.4;fe.add(quill);
+    fe.position.set(6.4,0,0);fe.rotation.z=-.35;fl.add(fe);
+    fl.rotation.z=.22;fl.position.y=2.5;g.add(fl);
+    const notes=[];for(let k=0;k<7;k++){const n=label(k%2?'♫':'♪','chill','#F2ECDD',2.4);g.add(n);notes.push(n);}
+    return tm=>{fl.rotation.y=Math.sin(tm*.4)*.35;fl.position.y=2.5+Math.sin(tm*.8)*.3;
+      notes.forEach((n,k)=>{const f=(tm*.18+k/7)%1;n.position.set(-3+k*1.4+Math.sin(tm+k)*.6,3+f*8,1);n.material.opacity=Math.sin(f*Math.PI);});};
+  });
+
+  /* ===== HIPPIE TRIPPY ===== */
+  // Hustle: a taped-shut black box (NSFW), a film clapperboard (clipping), a shipping parcel (dropshipping)
+  add(11,g=>{
+    const row=new THREE.Group();row.position.y=2.2;g.add(row);
+    const nb=new THREE.Group();nb.add(new THREE.Mesh(new THREE.BoxGeometry(3,3,3),std(0x0a0a0a,{roughness:.35})));
+    const tapeTex=tex(1024,128,(x,w,h)=>{x.fillStyle='#FFD400';x.fillRect(0,0,w,h);x.fillStyle='#111';x.font='80px Shrikhand, Georgia';x.textAlign='center';x.textBaseline='middle';x.fillText('NSFW  ✕  NSFW  ✕  NSFW',w/2,h/2+6);});
+    const tp=new THREE.Mesh(new THREE.BoxGeometry(3.06,.6,3.06),new THREE.MeshBasicMaterial({map:tapeTex}));nb.add(tp);
+    const tv=new THREE.Mesh(new THREE.BoxGeometry(.6,3.06,3.06),flat(0xFFD400));nb.add(tv);
+    nb.position.x=-6.5;
+    const cb=new THREE.Group();
+    cb.add(new THREE.Mesh(new THREE.BoxGeometry(4,3,.25),std(0x111111)));
+    const slate=tex(512,384,(x,w,h)=>{x.fillStyle='#111';x.fillRect(0,0,w,h);x.strokeStyle='#eee';x.lineWidth=4;x.strokeRect(20,20,w-40,h-40);x.beginPath();x.moveTo(20,h/2);x.lineTo(w-20,h/2);x.moveTo(w/2,h/2);x.lineTo(w/2,h-20);x.stroke();
+      x.fillStyle='#eee';x.font='500 44px Archivo, Arial';x.fillText('SCENE',40,80);x.fillText('SPEECH',40,150);x.fillText('TAKE',40,250);x.fillText('1',40,330);x.fillText('ROLL',w/2+20,250);x.fillText('A',w/2+20,330);});
+    const face=new THREE.Mesh(new THREE.PlaneGeometry(3.9,2.9),new THREE.MeshBasicMaterial({map:slate}));face.position.z=.13;cb.add(face);
+    const stripes=tex(512,72,(x,w,h)=>{x.fillStyle='#111';x.fillRect(0,0,w,h);x.fillStyle='#f4f4f4';for(let i=-1;i<9;i++){x.beginPath();x.moveTo(i*64,h);x.lineTo(i*64+32,0);x.lineTo(i*64+64,0);x.lineTo(i*64+32,h);x.fill();}});
+    const smat=new THREE.MeshBasicMaterial({map:stripes});
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(4,.55,.27),smat);bar.position.y=1.78;cb.add(bar);
+    const hinge=new THREE.Group();hinge.position.set(-2,2.06,0);cb.add(hinge);
+    const top=new THREE.Mesh(new THREE.BoxGeometry(4,.55,.25),smat);top.position.set(2,.28,0);hinge.add(top);
+    const pb=new THREE.Group();pb.add(new THREE.Mesh(new THREE.BoxGeometry(3.2,2.4,3.2),std(0xC49A6C,{roughness:.9})));
+    const strip=new THREE.Mesh(new THREE.BoxGeometry(.7,.03,3.22),std(0xA87B4F));strip.position.y=1.21;pb.add(strip);
+    const lbl=tex(320,220,(x,w,h)=>{x.fillStyle='#fff';x.fillRect(0,0,w,h);x.fillStyle='#111';x.font='500 30px Archivo, Arial';x.fillText('SHIP TO:',18,42);x.fillRect(18,58,200,6);x.fillRect(18,78,160,6);for(let i=0;i<46;i++){if(Math.random()>.4)x.fillRect(18+i*6,120,Math.random()>.5?4:2,80);}});
+    const tag=new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.03),new THREE.MeshBasicMaterial({map:lbl}));tag.position.set(.3,-.2,1.61);pb.add(tag);
+    pb.position.x=6.5;
+    row.add(nb,cb,pb);
+    return tm=>{[nb,cb,pb].forEach((o,k)=>{o.rotation.y=Math.sin(tm*.7+k)*.5;o.position.y=Math.sin(tm*1.5+k*1.3)*.4;});hinge.rotation.z=.55*Math.pow(Math.max(0,Math.sin(tm*2.4)),3);};
+  });
+  // Builds: a laptop whose screen has a Dynamic Island (Notchzy), and a streetwear tee (Street Lab)
+  add(12,g=>{
+    const metal=std(0xC8CAD0,{metalness:.6,roughness:.35});
+    const lap=new THREE.Group();
+    lap.add(new THREE.Mesh(new THREE.BoxGeometry(7,.3,4.6),metal));
+    const hinge=new THREE.Group();hinge.position.set(0,.15,-2.3);hinge.rotation.x=-.22;lap.add(hinge);
+    const lid=new THREE.Mesh(new THREE.BoxGeometry(7,4.6,.2),metal);lid.position.y=2.3;hinge.add(lid);
+    const sm=new THREE.MeshBasicMaterial({color:0xffffff});const scr=new THREE.Mesh(new THREE.PlaneGeometry(6.6,4.2),sm);scr.position.set(0,2.3,.11);hinge.add(scr);
+    const isl=new THREE.Mesh(new THREE.SphereGeometry(1,32,16),new THREE.MeshBasicMaterial({color:0x000000}));isl.scale.set(.8,.22,.05);isl.position.set(0,4.05,.13);hinge.add(isl);
+    const ln=label('Notchzy','trip','#FFF3C4',3.6);ln.position.y=-1.4;lap.add(ln);
+    lap.position.set(-6.8,0,0);lap.scale.setScalar(.8);g.add(lap);
+    const sh=new THREE.Shape();sh.moveTo(-1,3);sh.quadraticCurveTo(0,2.2,1,3);[[3,2.4],[4.3,.8],[3.1,0],[2.6,.6],[2.6,-3.5],[-2.6,-3.5],[-2.6,.6],[-3.1,0],[-4.3,.8],[-3,2.4]].forEach(([x,y])=>sh.lineTo(x,y));sh.lineTo(-1,3);
+    const tm_=std(0xffffff,{roughness:.8});const tee=new THREE.Mesh(new THREE.ExtrudeGeometry(sh,{depth:.4,bevelEnabled:true,bevelThickness:.12,bevelSize:.12,bevelSegments:2}),tm_);
+    tee.geometry.center();const tg=new THREE.Group();tg.add(tee);tee.scale.setScalar(.75);
+    const ls=label('Street Lab','trip','#FFF3C4',3.8);ls.position.y=-3.6;tg.add(ls);
+    tg.position.set(6.8,3.2,0);g.add(tg);
+    // Uxify: a screenshot being scanned by AI, a magnifier inspecting it, stars filling in as the rating
+    const ux=new THREE.Group();
+    const shot=tex(360,640,(x,w,h)=>{x.fillStyle='#fff';x.fillRect(0,0,w,h);x.fillStyle='#e4e4e4';x.fillRect(24,24,w-48,60);x.fillStyle='#cfcfcf';x.fillRect(24,110,w-48,200);
+      x.fillStyle='#e4e4e4';for(let i=0;i<4;i++)x.fillRect(24,335+i*50,w-48-(i%2)*90,26);x.fillStyle='#FF3EA5';x.fillRect(24,h-90,w-48,56);});
+    const pg=new THREE.PlaneGeometry(3.2,5.7);ux.add(new THREE.Mesh(pg,new THREE.MeshBasicMaterial({map:shot,side:THREE.DoubleSide})));
+    const fr=edges(pg,0xffffff,1);fr.position.z=.01;ux.add(fr);
+    const beam=new THREE.Mesh(new THREE.PlaneGeometry(3.7,.14),new THREE.MeshBasicMaterial({color:0x47E5FF,transparent:true,opacity:.9}));beam.position.z=.03;ux.add(beam);
+    const mag=new THREE.Group();const mm=std(0x222222,{metalness:.5,roughness:.3});
+    mag.add(new THREE.Mesh(new THREE.TorusGeometry(.75,.11,12,48),mm));
+    const lens=new THREE.Mesh(new THREE.CircleGeometry(.7,32),new THREE.MeshBasicMaterial({color:0xBFF6FF,transparent:true,opacity:.25}));mag.add(lens);
+    const hd=new THREE.Mesh(new THREE.CylinderGeometry(.11,.13,1.4,12),mm);hd.position.set(.85,-.85,0);hd.rotation.z=Math.PI/4;mag.add(hd);
+    mag.position.z=.9;ux.add(mag);
+    const ss=new THREE.Shape();for(let k=0;k<10;k++){const r=k%2?.15:.34,a=k/10*Math.PI*2+Math.PI/2;k?ss.lineTo(Math.cos(a)*r,Math.sin(a)*r):ss.moveTo(Math.cos(a)*r,Math.sin(a)*r);}
+    const sg=new THREE.ShapeGeometry(ss);const starM=[];
+    for(let k=0;k<5;k++){const m=new THREE.MeshBasicMaterial({color:0x555555});const st=new THREE.Mesh(sg,m);st.position.set((k-2)*.75,3.45,0);ux.add(st);starM.push(m);}
+    const lu=label('Uxify','trip','#FFF3C4',3.4);lu.position.y=-3.8;ux.add(lu);
+    ux.position.set(0,2.6,0);g.add(ux);
+    const UXT=tm=>{const c=(tm*.35)%1;beam.position.y=2.8-c*5.6;const lit=Math.floor(clamp((tm*.35)%2-1,0,1)*5.99);
+      starM.forEach((m,k)=>m.color.set(k<lit?0xFFD400:0x555555));mag.position.x=Math.sin(tm*.9)*1.1;mag.position.y=Math.cos(tm*.7)*1.6;ux.rotation.y=Math.sin(tm*.5)*.3;};
+    return tm=>{UXT(tm);lap.rotation.y=Math.sin(tm*.6)*.45;hue(sm,tm*.1,.5);const o=Math.max(0,Math.sin(tm*1.3));isl.scale.x=.8+o*1.1;isl.scale.y=.22+o*.2;
+      tee.rotation.y=tm*.8;hue(tm_,tm*.12+.4,.55);};
+  });
+  add(13,g=>{
+    const road=new THREE.Mesh(new THREE.PlaneGeometry(8,140),std(0x1c0f2e,{roughness:1}));road.rotation.x=-Math.PI/2;road.position.set(0,-4,-30);g.add(road);
+    const dashes=[];for(let k=0;k<22;k++){const m=glow(0xffffff,1.2);const d=new THREE.Mesh(new THREE.BoxGeometry(.3,.05,2.2),m);d.position.set(0,-3.95,30-k*6.5);g.add(d);dashes.push(m);}
+    const th=emoji('👍',5.5);th.position.set(0,3,-2);g.add(th);
+    const floaters=['☮️','🌼','✌️','🌈','🌼'].map((e,k)=>{const s=emoji(e,2.4);const a=k/5*Math.PI*2;s.position.set(Math.cos(a)*7,2+Math.sin(a)*3,-4+Math.sin(a)*3);g.add(s);return s;});
+    return tm=>{th.position.y=3+Math.sin(tm*2)*.5;th.material.rotation=Math.sin(tm*1.5)*.15;dashes.forEach((m,k)=>hue(m,tm*.2+k*.05));
+      floaters.forEach((s,k)=>{s.material.rotation=tm*(k%2?.5:-.5);s.position.y+=Math.sin(tm*1.5+k)*.01;});};
+  });
+  add(14,g=>{
+    const ball=new THREE.Group();g.add(ball);
+    ball.add(new THREE.Mesh(new THREE.SphereGeometry(3,48,48),std(0xE8742A,{emissive:0xC2551A,emissiveIntensity:.5,roughness:.7})));
+    const seam=new THREE.MeshBasicMaterial({color:0x1a0d06});
+    [[Math.PI/2,0],[0,0],[0,Math.PI/2]].forEach(([x,y])=>{const r=new THREE.Mesh(new THREE.TorusGeometry(3.02,.07,8,96),seam);r.rotation.set(x,y,0);ball.add(r);});
+    const hm=glow(0xffffff,1.3);const hoop=new THREE.Mesh(new THREE.TorusGeometry(2.8,.13,12,64),hm);hoop.rotation.x=Math.PI/2.3;hoop.position.set(0,8,-6);g.add(hoop);
+    return tm=>{ball.scale.set(1+Math.sin(tm*5.2)*.06,1-Math.sin(tm*5.2)*.06,1);ball.position.y=Math.abs(Math.sin(tm*2.6))*5-1.5;ball.rotation.x=tm*2;ball.rotation.z=tm*.6;hue(hm,tm*.2);};
+  });
+  // psychedelic ring tunnel through the trippy chapters
+  {const rings=[];const z0=-11*GAP+35,z1=-14*GAP-40;
+    for(let z=z0,k=0;z>z1;z-=6,k++){const m=new THREE.MeshBasicMaterial({color:0xffffff});const r=new THREE.Mesh(new THREE.TorusGeometry(17,.18,8,96),m);r.position.z=z;r.userData.k=k;scene.add(r);rings.push(r);}
+    extras.push(tm=>rings.forEach(r=>{const k=r.userData.k;r.material.color.setHSL((tm*.15+k*.035)%1,1,.6);r.rotation.z=tm*.2+k*.12;r.scale.set(1+Math.sin(tm+k*.4)*.08,1+Math.cos(tm+k*.4)*.08,1);}));}
+
+  // psychedelic plasma that wraps the camera during the trippy chapters
+  tripSky=new THREE.Mesh(new THREE.SphereGeometry(150,48,32),new THREE.ShaderMaterial({
+    side:THREE.BackSide,transparent:true,depthWrite:false,
+    uniforms:{time:{value:0},opacity:{value:0}},
+    vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+    fragmentShader:'uniform float time;uniform float opacity;varying vec2 vUv;void main(){vec2 p=vUv*vec2(14.,7.);float v=sin(p.x+time)+sin(p.y*1.3+time*.7)+sin((p.x+p.y)*.7+time*1.1)+sin(length(p-vec2(7.,3.5))*1.8-time*1.6);vec3 c=.5+.5*cos(6.2831*(v*.18+vec3(0.,.33,.67))+time*.4);gl_FragColor=vec4(c*.5,opacity);}'
+  }));
+  tripSky.renderOrder=-1;scene.add(tripSky);
+
+  /* ===== MUGHAL ===== */
+  // Prime Minister: the Ashoka Chakra from the national flag, floating over a circular colonnade like the old Sansad Bhavan
+  add(15,g=>{
+    const gm=glow(GOLD,1.1);const gold=std(GOLD,{metalness:.5,roughness:.35,emissive:GOLD,emissiveIntensity:.12});
+    const wheel=new THREE.Group();g.add(wheel);
+    wheel.add(new THREE.Mesh(new THREE.TorusGeometry(5,.28,16,96),gm));wheel.add(new THREE.Mesh(new THREE.TorusGeometry(1,.2,12,48),gm));
+    for(let k=0;k<24;k++){const s=new THREE.Mesh(new THREE.BoxGeometry(.12,4,.12),gm);const a=k/24*Math.PI*2;s.position.set(Math.cos(a)*3,Math.sin(a)*3,0);s.rotation.z=a-Math.PI/2;wheel.add(s);}
+    wheel.position.y=6.5;
+    const hall=new THREE.Group();
+    for(let k=0;k<40;k++){const a=k/40*Math.PI*2;const c=new THREE.Mesh(new THREE.CylinderGeometry(.26,.3,5,12),gold);c.position.set(Math.cos(a)*11,-2,Math.sin(a)*11);hall.add(c);}
+    const base=new THREE.Mesh(new THREE.CylinderGeometry(12,12.6,.7,96),std(0x2a1a10,{roughness:.8}));base.position.y=-4.85;hall.add(base);
+    const top=new THREE.Mesh(new THREE.TorusGeometry(11,.38,8,128),gold);top.rotation.x=Math.PI/2;top.position.y=.6;hall.add(top);
+    g.add(hall);
+    return tm=>{wheel.rotation.z=-tm*.45;hall.rotation.y=tm*.05;};
+  });
+  add(16,g=>{
+    const crown=new THREE.Group();g.add(crown);const gm=glow(GOLD,1.1);
+    crown.add(new THREE.Mesh(new THREE.TorusGeometry(3,.4,16,64),gm).rotateX(Math.PI/2));
+    for(let k=0;k<8;k++){const a=k/8*Math.PI*2;const c=new THREE.Mesh(new THREE.ConeGeometry(.55,2.6,16),gm);c.position.set(Math.cos(a)*3,1.3,Math.sin(a)*3);crown.add(c);
+      const j=new THREE.Mesh(new THREE.OctahedronGeometry(.4),glow(k%2?0xC21E3A:0x1FA67A,1.6));j.position.set(Math.cos(a)*3,2.8,Math.sin(a)*3);crown.add(j);}
+    crown.position.y=1;crown.rotation.x=.3;
+    const halo=new THREE.Mesh(new THREE.TorusGeometry(9,.12,8,128),glow(0xFFF1CC,1.8));halo.position.set(0,3,-6);g.add(halo);
+    const rays=new THREE.Group();rays.position.copy(halo.position);g.add(rays);
+    for(let k=0;k<36;k++){const r=new THREE.Mesh(new THREE.BoxGeometry(.06,6+Math.random()*8,.06),glow(GOLD,1.4));const a=k/36*Math.PI*2;r.position.set(Math.cos(a)*14,Math.sin(a)*14,0);r.rotation.z=a-Math.PI/2;rays.add(r);}
+    return tm=>{crown.rotation.y=tm*.4;rays.rotation.z=tm*.05;halo.scale.setScalar(1+Math.sin(tm)*.04);};
+  });
+  // The end: an open book with a quill still writing; the story isn't finished
+  add(17,g=>{
+    const book=new THREE.Group();
+    book.add(new THREE.Mesh(new THREE.BoxGeometry(11,.25,7.2),std(0x5A1020,{roughness:.6})));
+    const paper=std(0xF3E9D2,{roughness:.9});const ink=std(0x6b4a14);
+    const mk=(sx)=>{const pg=new THREE.Mesh(new THREE.BoxGeometry(5.1,.22,6.7),paper);pg.position.set(sx*2.6,.22,0);pg.rotation.z=-sx*.1;book.add(pg);return pg;};
+    const L=mk(-1),R=mk(1);
+    const lg=new THREE.BoxGeometry(3.6,.02,.09);lg.translate(1.8,0,0);
+    for(let j=0;j<7;j++){const l=new THREE.Mesh(lg,ink);l.position.set(-1.8,.13,-2.4+j*.75);L.add(l);}
+    const lines=[];for(let j=0;j<7;j++){const l=new THREE.Mesh(lg,ink);l.position.set(-1.8,.13,-2.4+j*.75);l.scale.x=.001;R.add(l);lines.push(l);}
+    const quill=new THREE.Group();
+    const fe=new THREE.Mesh(new THREE.SphereGeometry(1,24,16),std(0xFFF6E6,{roughness:.7}));fe.scale.set(.5,2.8,.06);fe.position.y=3.6;quill.add(fe);
+    const shaft=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,6.4,8),glow(GOLD,.6));shaft.position.y=3.1;quill.add(shaft);
+    const nib=new THREE.Mesh(new THREE.ConeGeometry(.1,.5,12),glow(GOLD,.8));nib.rotation.x=Math.PI;nib.position.y=.05;quill.add(nib);
+    quill.rotation.z=-.45;quill.rotation.x=-.5;R.add(quill);
+    book.rotation.x=.8;book.position.y=1.5;g.add(book);
+    return tm=>{const c=((tm/10)%1)*8;let cur=0;
+      lines.forEach((l,j)=>{const k=clamp(c-j,0,1);l.scale.x=Math.max(k,.001);if(c>=j&&c<j+1)cur=j;});
+      const j=Math.min(Math.floor(c),6),k=clamp(c-j,0,1);
+      quill.position.set(-1.8+3.6*k,.16+Math.abs(Math.sin(tm*14))*.08,-2.4+j*.75);
+      book.rotation.y=Math.sin(tm*.25)*.15;};
+  });
+  // corridor of Mughal arches through the final chapters
+  {const pts=[];const w=13,base=-9,side=14,apex=26;
+    pts.push(new THREE.Vector3(-w,base,0),new THREE.Vector3(-w,base+side,0),new THREE.Vector3(-w*.75,base+side+6,0),new THREE.Vector3(-w*.3,base+apex-3,0),new THREE.Vector3(0,base+apex,0),
+      new THREE.Vector3(w*.3,base+apex-3,0),new THREE.Vector3(w*.75,base+side+6,0),new THREE.Vector3(w,base+side,0),new THREE.Vector3(w,base,0));
+    const curve=new THREE.CatmullRomCurve3(pts,false,'catmullrom',.15);
+    const geo=new THREE.TubeGeometry(curve,160,.16,8,false);const inner=new THREE.TubeGeometry(curve,160,.08,6,false);
+    const gm=glow(GOLD,1.1);
+    for(let z=-15*GAP+45;z>-17*GAP-40;z-=14){const a=new THREE.Mesh(geo,gm);a.position.z=z;scene.add(a);const b=new THREE.Mesh(inner,gm);b.scale.setScalar(.86);b.position.set(0,-1.2,z);scene.add(b);}}
+
+  // stars
+  const n=3000,p=new Float32Array(n*3);
+  for(let k=0;k<n;k++){p[k*3]=(Math.random()-.5)*260;p[k*3+1]=(Math.random()-.5)*180;p[k*3+2]=60-Math.random()*(N*GAP+140);}
+  stars=new THREE.Points(new THREE.BufferGeometry().setAttribute('position',new THREE.BufferAttribute(p,3)),new THREE.PointsMaterial({color:0xffffff,size:.45,transparent:true,opacity:0,fog:false}));
+  scene.add(stars);
+}
+
+function sceneBG(i,tm){
+  if(TH[i]==='trip'){const c=new THREE.Color();c.setHSL((tm*.04+i*.08)%1,.6,.2);return c;}
+  return new THREE.Color(BG[i]||BG[0]);
+}
+const mixN=(a,b,k)=>a+(b-a)*k;
+
+function initGL(){
+  renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(innerWidth,innerHeight,false);
+  scene=new THREE.Scene();scene.background=new THREE.Color(BG[0]);scene.fog=new THREE.FogExp2(BG[0],.017);
+  camera=new THREE.PerspectiveCamera(innerWidth<700?72:58,innerWidth/innerHeight,.1,400);
+  amb=new THREE.AmbientLight(0xffffff,1);scene.add(amb);
+  const key=new THREE.PointLight(0xfff0dc,1.2,90);camera.add(key);scene.add(camera);
+  const dir=new THREE.DirectionalLight(0xffffff,.6);dir.position.set(-5,10,6);scene.add(dir);
+  if(THREE.EffectComposer&&THREE.UnrealBloomPass){
+    composer=new THREE.EffectComposer(renderer);composer.addPass(new THREE.RenderPass(scene,camera));
+    bloom=new THREE.UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0,.45,.6);composer.addPass(bloom);
+  }
+  buildWorld();
+}
+function resize(){
+  sizeScroll();tTarget=Math.min(scrollY/seg,N-1);if(!renderer)return;
+  camera.aspect=innerWidth/innerHeight;camera.fov=innerWidth<700?72:58;camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight,false);if(composer)composer.setSize(innerWidth,innerHeight);
+}
+addEventListener('resize',resize);
+addEventListener('pointermove',e=>{ptr.x=e.clientX/innerWidth-.5;ptr.y=e.clientY/innerHeight-.5;},{passive:true});
+
+const t0=performance.now();
+function frame(){
+  requestAnimationFrame(frame);
+  t+=(tTarget-t)*(reduce?1:.08);
+  updateOverlays();
+  if(started&&soundOn&&!cried&&Math.abs(t-1)<.25){cried=true;cry();}
+  if(!renderer)return;
+  if(scrollY>(N-1)*seg+innerHeight*1.05)return;
+  const tm=reduce?0:(performance.now()-t0)/1000;
+  const ci=clamp(t,0,N-1),a=Math.floor(ci),b=Math.min(a+1,N-1),f=ci-a;
+  const col=sceneBG(a,tm).lerp(sceneBG(b,tm),f);
+  scene.background.copy(col);scene.fog.color.copy(col);
+  amb.intensity=mixN(AMB[TH[a]],AMB[TH[b]],f);
+  if(bloom)bloom.strength=mixN(BLOOM[TH[a]],BLOOM[TH[b]],f);
+  const night=t<7.5?0:clamp((t-7.5)/1.5,0,1);stars.material.opacity=night*.9;
+  camera.position.x+=(ptr.x*3-camera.position.x)*.05;camera.position.y+=(-ptr.y*2-camera.position.y)*.05;
+  camera.position.z=28-t*GAP;camera.lookAt(camera.position.x*.3,-3,camera.position.z-30);
+  const tripW=(TH[a]==='trip'?1-f:0)+(TH[b]==='trip'?f:0);
+  tripSky.position.copy(camera.position);tripSky.material.uniforms.time.value=tm;tripSky.material.uniforms.opacity.value=tripW*.95;tripSky.visible=tripW>.01;
+  if(tripW>0)camera.rotateZ(Math.sin(tm*.6)*.12*tripW);
+  pieces.forEach(p=>{const d=t-p.i;p.g.visible=d>-1.3&&d<.7;if(p.g.visible)p.tick(tm,d);});
+  extras.forEach(fn=>fn(tm));
+  composer?composer.render():renderer.render(scene,camera);
+}
+
+/* navigation, menu, keys, portfolio */
+const NAMES=['18 June 2007','The hospital','Rewa','Family','Home kept moving','School','The Aravalli jungle','NIFT Delhi','Inside my head','Vipassana & dreams','The flute','The hustle','Things I build','The road','Basketball','Prime Minister','King, maybe god','Still being written'];
+const storyEnd=()=>(N-1)*seg;
+const goChapter=i=>{closeMenu();scrollTo({top:i*seg,behavior:'smooth'});};
+const chap=document.getElementById('chapters');
+NAMES.forEach((n,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.innerHTML='<small>'+String(i+1).padStart(2,'0')+'</small>'+n;b.onclick=()=>goChapter(i);li.appendChild(b);chap.appendChild(li);});
+const menu=document.getElementById('menu'),mb=document.getElementById('menuBtn');
+function openMenu(){menu.classList.add('open');mb.setAttribute('aria-expanded','true');}
+function closeMenu(){menu.classList.remove('open');mb.setAttribute('aria-expanded','false');}
+mb.onclick=openMenu;document.getElementById('menuClose').onclick=closeMenu;
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();closeMenu();
+  if(a.dataset.go!==undefined){goChapter(+a.dataset.go);return;}
+  const el=document.querySelector(a.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth'});}));
+document.getElementById('skip').onclick=()=>document.getElementById('about').scrollIntoView({behavior:'smooth'});
+document.getElementById('replay').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+addEventListener('keydown',e=>{
+  if(!started)return;
+  if(e.key==='Escape'){closeMenu();return;}
+  if(menu.classList.contains('open'))return;
+  const inStory=scrollY<storyEnd()+10;if(!inStory)return;
+  const cur=Math.round(scrollY/seg);
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();cur>=N-1?document.getElementById('about').scrollIntoView({behavior:'smooth'}):goChapter(cur+1);}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();goChapter(Math.max(0,cur-1));}
+});
+const secs=[...document.querySelectorAll('#folio section')],navLinks=[...document.querySelectorAll('#nav .links a')];
+function uiTick(){
+  const inStory=scrollY<storyEnd()+innerHeight*.5;
+  document.getElementById('skip').classList.toggle('gone',!started||!inStory);
+  document.querySelector('.keys').classList.toggle('gone',!started||!inStory);
+  let on=null;secs.forEach(s=>{if(s.getBoundingClientRect().top<innerHeight*.4)on=s.id;});
+  navLinks.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+on));
+}
+addEventListener('scroll',uiTick,{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const born=new Date('2007-06-18T00:00:00+05:30').getTime(),aliveEl=document.getElementById('alive');
+setInterval(()=>{aliveEl.textContent=Math.floor((Date.now()-born)/1000).toLocaleString('en-IN');},1000);
+aliveEl.textContent=Math.floor((Date.now()-born)/1000).toLocaleString('en-IN');
+
+/* confetti for the launch */
+(function(){
+  const cv=document.getElementById('confetti'),cx=cv.getContext('2d');let parts=[],run=false;
+  const cols=['#E8B84A','#FF3EA5','#3EC1FF','#9BFF4F','#F3E9D6'];
+  function burst(){const r=cv.getBoundingClientRect();cv.width=r.width*devicePixelRatio;cv.height=r.height*devicePixelRatio;
+    parts=[];for(let i=0;i<220;i++)parts.push({x:cv.width/2+(Math.random()-.5)*cv.width*.3,y:cv.height*.45,vx:(Math.random()-.5)*26,vy:-Math.random()*26-8,s:(4+Math.random()*6)*devicePixelRatio,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[i%5],life:0});
+    if(!run){run=true;requestAnimationFrame(step);}}
+  function step(){cx.clearRect(0,0,cv.width,cv.height);let alive=0;
+    parts.forEach(p=>{p.life++;p.vy+=.55;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(p.y<cv.height+40){alive++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore();}});
+    if(alive)requestAnimationFrame(step);else run=false;}
+  if(!reduce){const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)burst();}),{threshold:.5});ob.observe(document.getElementById('launch'));}
+})();
+
+Promise.race([
+  Promise.all([document.fonts.load('800 64px Archivo'),document.fonts.load('300 60px Archivo'),document.fonts.load(FONTS.min),document.fonts.load(FONTS.chill),document.fonts.load(FONTS.trip)]),
+  new Promise(r=>setTimeout(r,2500))
+]).catch(()=>{}).then(()=>{
+  if(hasGL){try{initGL();}catch(e){renderer=null;console.error(e);}}
+  frame();
+});
+})();
+</script>
+</body>
+</html>
